@@ -16,16 +16,16 @@ import com.google.common.collect.Lists;
  */
 public class MaxClosePriceMapper extends Mapper<LongWritable, Text, Text, FloatWritable> {
 
-    @Override
-    protected void map(LongWritable key, Text value,
-            Mapper<LongWritable, Text, Text, FloatWritable>.Context context)
-            throws IOException, InterruptedException {
-        String line = value.toString();
-        List<String> items = Lists.newArrayList(Splitter.on(',').split(line));
-        String stock = items.get(1);
-        Float closePrice = Float.parseFloat(items.get(6));
+  @Override
+  protected void map(LongWritable key, Text value,
+      Mapper<LongWritable, Text, Text, FloatWritable>.Context context)
+      throws IOException, InterruptedException {
+    String line = value.toString();
+    List<String> items = Lists.newArrayList(Splitter.on(',').split(line));
+    String stock = items.get(1);
+    Float closePrice = Float.parseFloat(items.get(6));
 
-        context.write(new Text(stock), new FloatWritable(closePrice));
+    context.write(new Text(stock), new FloatWritable(closePrice));
 
-    }
+  }
 }

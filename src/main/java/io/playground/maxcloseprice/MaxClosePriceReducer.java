@@ -11,15 +11,15 @@ import org.apache.hadoop.mapreduce.Reducer;
  */
 public class MaxClosePriceReducer extends Reducer<Text, FloatWritable, Text, FloatWritable> {
 
-    @Override
-    protected void reduce(Text key, Iterable<FloatWritable> values,
-            Reducer<Text, FloatWritable, Text, FloatWritable>.Context context)
-            throws IOException, InterruptedException {
-        float maxClosePrice = Float.MIN_VALUE;
-        for (FloatWritable value : values) {
-            maxClosePrice = Math.max(maxClosePrice, value.get());
-        }
-        context.write(key, new FloatWritable(maxClosePrice));
+  @Override
+  protected void reduce(Text key, Iterable<FloatWritable> values,
+      Reducer<Text, FloatWritable, Text, FloatWritable>.Context context)
+      throws IOException, InterruptedException {
+    float maxClosePrice = Float.MIN_VALUE;
+    for (FloatWritable value : values) {
+      maxClosePrice = Math.max(maxClosePrice, value.get());
     }
+    context.write(key, new FloatWritable(maxClosePrice));
+  }
 
 }
